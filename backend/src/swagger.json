@@ -1,0 +1,153 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Pizzaria",
+        "description": "Essa API tem como objetivo o controle de produtos de uma pizzaria.",
+        "termsOfService": "http://localhost:3333/terms",
+        "contact": {
+            "email": "mateuscizeski@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [{
+        "url": "http://localhost:3333/v1",
+        "description": "API de teste"
+    }],
+    "paths": {
+        "/users": {
+          "post": {
+            "summary": "Cadastro de usuário",
+            "description": "Cria um usuário novo no sistema com o token.",
+            "tags": ["Users"],
+            "requestBody": {
+                "content": {
+                    "application/json" :{
+                        "schema" :{ "$ref": "#/components/schemas/User" },
+                        "examples": {
+                            "user": {
+                                "value": {
+                                    "name": "Mateus",
+                                    "email": "mateus@teste.com",
+                                    "password": "******"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+               "401": { "description": "Unauthorized" }, 
+               "400": { "description": "User already exists" },
+               "200": { 
+                "description": "OK", 
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/User"
+                        }
+                    }
+               }} 
+            }
+          } 
+        },
+        "/session": {
+            "post": {
+                "summary": "Login do usuário com o retorno do token",
+                "description": "Loga o usuário no sistema retoranando o token de autorização.",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": { "$ref":"#/components/schemas/Session" },
+                            "examples": {
+                                "session": {
+                                    "value": {
+                                        "email": "mateus@teste.com",
+                                        "password": "******"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": { "description": "Unauthorized" }, 
+                    "400": { "description": "User/password incorrect" },
+                    "200": { 
+                    "description": "OK", 
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Session"
+                            }
+                        }
+                }} 
+                }
+            }
+        },
+        "/me" : {
+            "get": {
+                "description": "Busca detalhes do usuário",
+                "summary": "Busca detalhes do usuário",
+                "security": [{ "bearerAuth": []}],
+                "tags": ["Users"],
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "query",
+                    "description": "ID do usuário",
+                    "required": true 
+                }],
+                "responses": {
+                    "401": { "description": "Unauthorized" },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "$ref": "#/components/schemas/DetailUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "password": { "type": "string" }
+                }
+            },
+            "Session": {
+                "type": "object",
+                "properties": {
+                    "email": { "type": "string" },
+                    "password": { "type": "string" }
+                }
+            },
+            "DetailUser": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "beaderFormat": "JWT"
+            }
+        }
+    }
+}
