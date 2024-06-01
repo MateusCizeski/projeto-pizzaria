@@ -1,7 +1,5 @@
 import { useContext, FormEvent, useState } from "react";
 import Head from "next/head"
-import Image from "next/image";
-import logoImg from '../../public/logo.svg';
 import styles from '../../styles/Home.module.scss';
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
@@ -40,10 +38,9 @@ export default function Home() {
         <title>Pizza - Faça seu login</title>
       </Head>
 
-      <div className={styles.containerCenter}>
-        <Image src={logoImg} alt="pizzaria"/>
-        
+      <div className={styles.containerCenter}>        
         <div className={styles.login}>
+          <h1>Faça seu login</h1>
          <form onSubmit={handleLogin}>
           <Input placeholder="Digite seu email" type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
           <Input placeholder="Sua senha" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
