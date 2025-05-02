@@ -3,14 +3,14 @@
     "info": {
         "title": "API Pizzaria",
         "description": "Essa API tem como objetivo o controle de produtos de uma pizzaria.",
-        "termsOfService": "http://localhost:3333/terms",
+        "termsOfService": "http://localhost:3002/terms",
         "contact": {
             "email": "mateuscizeski@gmail.com"
         },
         "version": "1.0.0"
     },
     "servers": [{
-        "url": "http://localhost:3333/v1",
+        "url": "http://localhost:3002/v1",
         "description": "API de teste"
     }],
     "paths": {
