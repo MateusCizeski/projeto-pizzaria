@@ -55,7 +55,4 @@ router.get('/orders', isAuthenticated, new ListOrdersController().handle);
 router.get('/order/detail', isAuthenticated, new DetailOrderController().handle);
 router.put('/order/finish', isAuthenticated, new FinishOrderController().handle);
 
-// --- DEPLOY ---
-router.post("/github-webhook", new DeployController().handle);
-
 export { router };
