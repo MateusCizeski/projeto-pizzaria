@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.use("/v1", router);
+app.use("/api/restaurant", router);
 
 app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')));
 
@@ -29,4 +29,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     });
 });
 
-app.listen(3333, () => { console.log('servidor online') });
+app.listen(3002, () => console.log('SERVER ONLINE :)'));

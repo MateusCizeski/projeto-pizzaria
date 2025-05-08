@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    // baseURL: 'http://localhost:3333/v1'
-    baseURL: 'http://10.0.0.126:3333/v1'
+    baseURL: 'https://meuservidorubuntu.com.br/api/restaurant',
 });
 
 export { api };
